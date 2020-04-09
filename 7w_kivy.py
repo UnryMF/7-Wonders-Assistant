@@ -3,11 +3,13 @@
 ##############################
 
 import kivy
+import self as self
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import StringProperty
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
@@ -68,18 +70,17 @@ class WManager(BoxLayout, Screen):
         with open('test.txt', 'a') as self.newFile:
             for self.i in self.player_names:
                 self.wonder = random.choice(self.w0)
-                # self.add = self.i, 'will play', self.wonder, '(', random.choice(AdvancedWindow.ab), ')'
-                self.add = self.i, 'will play', self.wonder, random.choice(AdvancedWindow.ab)
-                # print(self.i, 'will play', self.wonder, '(', random.choice(AdvancedWindow.ab), ')')
-                #self.newFile.write(str(self.add))
-                #self.newFile.write('\n')
+                self.add = self.i + ' will play ' + self.wonder + ' (' + random.choice(AdvancedWindow.ab) + ')'
+                # print(self.i, ' will play ', self.wonder, '(', random.choice(AdvancedWindow.ab), ')')
                 self.append_new_line('test.txt', str(self.add))
                 self.w0.remove(self.wonder)
+
 
     def next_btn(self):
         self.player_set()
         # print(self.player_names)
         self.randomizer()
+        self.newFile.close()
     pass
 
 
@@ -159,9 +160,13 @@ class AdvancedWindow(BoxLayout, Screen):
 
 class ResultsScreen(BoxLayout, Screen):
 
-    with open('test.txt', 'r') as display:
-        display_contents = display.read()
+    display_contents = StringProperty('default')
 
+    def __init__(self, **kwargs):
+        super(ResultsScreen, self).__init__(**kwargs)
+
+        with open('test.txt', 'r') as self.display:
+            self.display_contents = self.display.read()
     pass
 
 
