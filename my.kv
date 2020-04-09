@@ -1,0 +1,226 @@
+WindowManager:
+    WManager:
+    AdvancedWindow:
+    ResultsScreen:
+
+<WManager>:
+    name: "WManager"
+
+    pp1: pp1
+    pp2: pp2
+    pp3: pp3
+    pp4: pp4
+    pp5: pp5
+    pp6: pp6
+    pp7: pp7
+    pp8: pp8
+
+    orientation: 'vertical'
+    padding: 25, 25
+    spacing: 5
+
+    BoxLayout:
+        size_hint: 1, .4
+        Label:
+            text: 'Players'
+            border:
+
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 1: '
+        TextInput
+            id: pp1
+            multiline:False
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 2: '
+        TextInput:
+            id: pp2
+            multiline:False
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 3:'
+        TextInput:
+            id: pp3
+            multiline:False
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 4:'
+        TextInput:
+            id: pp4
+            multiline:False
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 5:'
+        TextInput:
+            id: pp5
+            multiline:False
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 6:'
+        TextInput:
+            id: pp6
+            multiline:False
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 7:'
+        TextInput:
+            id: pp7
+            multiline:False
+    BoxLayout:
+        size_hint: 1, .3
+        Label:
+            text: 'Player 8:'
+        TextInput:
+            id: pp8
+            multiline:False
+    BoxLayout:
+        Button:
+            size_hint: 1, .65
+            text: 'Generate'
+            on_press: root.next_btn()
+            on_release:
+                app.root.current = "Results"
+                root.manager.transition.direction = "down"
+
+        Button:
+            size_hint: 1, .65
+            text: 'Advanced'
+            on_release:
+                app.root.current = "Advanced"
+                root.manager.transition.direction = "left"
+
+
+<AdvancedWindow>:
+    varA: varA
+    varB: varB
+    wl: wl
+    wc: wc
+    wp: wp
+    wa: wa
+    wo1: wo1
+    wo2: wo2
+    name: "Advanced"
+    orientation: 'vertical'
+    padding: 25, 25
+    spacing: 5
+
+    BoxLayout:
+        Label:
+            text: 'EXSPANSIONS'
+    BoxLayout:
+        CheckBox:
+            id: wl
+            on_press:
+                root.checkbutton_wl()
+        AdvLabel:
+            text: 'Leaders (2011)'
+    BoxLayout:
+        CheckBox:
+            id: wc
+            active: False
+            on_press:
+                root.checkbutton_wc()
+        AdvLabel:
+            text: 'Cities (2012)'
+    BoxLayout:
+        CheckBox:
+            id: wp
+            active: False
+            on_press:
+                root.checkbutton_wp()
+        AdvLabel:
+            text: 'Wonder Pack (May 2013)'
+    BoxLayout:
+        CheckBox:
+            id: wa
+            active: False
+            on_press:
+                root.checkbutton_wa()
+        AdvLabel:
+            text: 'Armada (October 2018)'
+    BoxLayout:
+        CheckBox:
+            id: wo1
+            active: False
+            on_press:
+                root.checkbutton_wo1()
+        AdvLabel:
+            text: 'The Manneken Pis of Brussels (SPIEL in October 2010)'
+    BoxLayout:
+        CheckBox:
+            id: wo2
+            active: False
+            on_press:
+                root.checkbutton_wo2()
+        AdvLabel:
+            text: 'The Settlers of Catan (SPIEL in October 2011)'
+
+    BoxLayout:
+        Label:
+            text: 'CHOOSE WONDER CARD SIDES'
+    BoxLayout:
+        CheckBox:
+            id: varA
+            active: True
+            on_press:
+                root.checkbutton_a()
+        AdvLabel
+            text: 'Side A'
+
+    BoxLayout:
+        CheckBox:
+            id: varB
+            active: True
+            on_press:
+                root.checkbutton_b()
+        AdvLabel:
+            text: 'Side B'
+
+
+    BoxLayout:
+        Button:
+            text: "Back"
+            on_release:
+                app.root.current = "WManager"
+                root.manager.transition.direction = "right"
+
+
+<ResultsScreen>
+    #entry: entry
+    name: 'Results'
+    orientation: 'vertical'
+    padding: 25, 25
+    spacing: 5
+
+    BoxLayout:
+        Label:
+            text: root.display_contents
+            multiline: True
+    BoxLayout:
+        Button:
+            text: "Back"
+            size_hint: 1, 0.4
+            on_release:
+                app.root.current = "WManager"
+                root.manager.transition.direction = "up"
+
+
+
+
+<AdvLabel@Label>
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+    font_size: 13
+
+<Button>
+    size_hint: 1, .8
+    background_color: (1, 1, 1, 1)
