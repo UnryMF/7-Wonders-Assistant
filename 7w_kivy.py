@@ -16,6 +16,7 @@ from kivy.uix.textinput import TextInput
 import random
 import csv
 
+
 kivy.require('1.11.1')
 
 
@@ -67,7 +68,7 @@ class WManager(BoxLayout, Screen):
         # if Advanced.varA and Advanced.VarB are False = warning message
         # if player8 is populated then at least Armanda/Cities have to be checked
         # establish file management to create new files for session / loads previous sessions with scores (later on)
-        with open('test.txt', 'a') as self.newFile:
+        with open('test.txt', 'a') as ResultsScreen.display:
             for self.i in self.player_names:
                 self.wonder = random.choice(self.w0)
                 self.add = self.i + ' will play ' + self.wonder + ' (' + random.choice(AdvancedWindow.ab) + ')'
@@ -75,13 +76,10 @@ class WManager(BoxLayout, Screen):
                 self.append_new_line('test.txt', str(self.add))
                 self.w0.remove(self.wonder)
 
-
     def next_btn(self):
         self.player_set()
         # print(self.player_names)
         self.randomizer()
-        self.newFile.close()
-    pass
 
 
 class WindowManager(ScreenManager):
@@ -160,13 +158,15 @@ class AdvancedWindow(BoxLayout, Screen):
 
 class ResultsScreen(BoxLayout, Screen):
 
-    display_contents = StringProperty('default')
-
     def __init__(self, **kwargs):
         super(ResultsScreen, self).__init__(**kwargs)
 
         with open('test.txt', 'r') as self.display:
             self.display_contents = self.display.read()
+            # print(self.display_contents)
+
+    display_contents = StringProperty('default')
+
     pass
 
 
